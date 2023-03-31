@@ -28,6 +28,32 @@ public class GlobalExceptionHandler {
 		
 	}
 	
+	@ExceptionHandler(InsurancePolicyException.class)
+	public ResponseEntity<MyErrorDetails> insurancePolicyExceptionHandler(InsurancePolicyException ie, WebRequest req){
+		
+		
+		MyErrorDetails err= new MyErrorDetails();
+			err.setTimestamp(LocalDateTime.now());
+			err.setMessage(ie.getMessage());
+			err.setDetails(req.getDescription(false));
+				
+		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.BAD_REQUEST);
+		
+	}
+	
+	@ExceptionHandler(ClaimException.class)
+	public ResponseEntity<MyErrorDetails> claimExceptionHandler(ClaimException ce, WebRequest req){
+		
+		
+		MyErrorDetails err= new MyErrorDetails();
+			err.setTimestamp(LocalDateTime.now());
+			err.setMessage(ce.getMessage());
+			err.setDetails(req.getDescription(false));
+				
+		return new ResponseEntity<MyErrorDetails>(err, HttpStatus.BAD_REQUEST);
+		
+	}
+	
 	
 	
 	@ExceptionHandler(Exception.class)

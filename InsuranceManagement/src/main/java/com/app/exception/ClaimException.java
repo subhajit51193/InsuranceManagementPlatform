@@ -1,13 +1,14 @@
 package com.app.exception;
 
-public class AuthorException extends Exception{
+public class ClaimException extends Exception{
 
-	public AuthorException() {
+	public ClaimException() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public AuthorException(String message) {
+	public ClaimException(String message) {
 		// TODO Auto-generated constructor stub
 		super(message);
 	}
+
 }
