@@ -19,7 +19,7 @@ import com.app.model.Customer;
 import com.app.service.CustomerService;
 
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/api/client")
 public class CustomerController {
 
 	
@@ -31,7 +31,7 @@ public class CustomerController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-
+//-----------Test
 	
 	@GetMapping("/hello")
 	public String testHandler() {
@@ -72,7 +72,7 @@ public class CustomerController {
 		
 	}
 	
-	@GetMapping("/getCustomer/{email}")
+	@GetMapping("/getClientByEmail/{email}")
 	public ResponseEntity<Customer> getCustomerByEmailHandler(@PathVariable("email") String email){
 		
 		
@@ -82,7 +82,7 @@ public class CustomerController {
 		
 	}
 	
-	@GetMapping("/getAllCustomers")
+	@GetMapping("/getAllClients")
 	public ResponseEntity<List<Customer>> getAllCustomerHandler(){
 		
 		
@@ -92,4 +92,22 @@ public class CustomerController {
 		
 	}
 	
+//	---------------
+	@GetMapping("/getClientById/{custId}")
+	public ResponseEntity<Customer> getCustomerByIdHandler(@PathVariable("custId") Integer custId){
+		Customer cst = customerService.getCustomerbyId(custId);
+		return new ResponseEntity<Customer>(cst,HttpStatus.ACCEPTED);
+	}
+	
+	@PutMapping("/update/{custId}")
+	public ResponseEntity<Customer> updateClientDetailsHandler(@RequestBody Customer customer,@PathVariable("custId") Integer custId){
+		Customer updatedCust = customerService.updateCustomerDetails(customer, custId);
+		return new ResponseEntity<Customer>(updatedCust,HttpStatus.ACCEPTED);
+	}
+	
+	@DeleteMapping("/delete/{custId}")
+	public ResponseEntity<Customer> deleteCustomerHandler(@PathVariable("custId") Integer custId){
+		Customer cust = customerService.deleteCustomerDetails(custId);
+		return new ResponseEntity<Customer>(cust,HttpStatus.ACCEPTED);
+	}
 }

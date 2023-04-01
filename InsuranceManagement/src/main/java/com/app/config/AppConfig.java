@@ -58,7 +58,7 @@ public class AppConfig {
 		.addFilterBefore(new JwtTokenValidatorFilter(), BasicAuthenticationFilter.class)
 		.authorizeHttpRequests()
 		.requestMatchers("/swagger-ui*/**","/v3/api-docs/**").permitAll()
-		.requestMatchers(HttpMethod.POST, "/customer/signUp")
+		.requestMatchers(HttpMethod.POST, "/api/client/signUp")
 		.permitAll().anyRequest()
 		.authenticated()
 //		.anyRequest()

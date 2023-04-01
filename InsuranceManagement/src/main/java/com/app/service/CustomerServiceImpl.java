@@ -64,6 +64,50 @@ public class CustomerServiceImpl implements CustomerService{
 		}
 	}
 
+	@Override
+	public Customer getCustomerbyId(Integer custId) throws CustomerException {
+		
+		Optional<Customer> opt = customerRepository.findById(custId);
+		if (opt.isEmpty()) {
+			throw new CustomerException("No client found");
+		}
+		else {
+			return opt.get();
+		}
+	}
+
+	@Override
+	public Customer updateCustomerDetails(Customer customer, Integer custId) throws CustomerException {
+		
+		Optional<Customer> opt = customerRepository.findById(custId);
+		if (opt.isEmpty()) {
+			throw new CustomerException("not found");
+		}
+		else {
+			Customer updated = opt.get();
+			updated.setAddress(customer.getAddress());
+			updated.setContact(customer.getContact());
+			updated.setEmail(customer.getEmail());
+			updated.setName(customer.getName());
+			updated.setPassword(customer.getPassword());
+			return customerRepository.save(updated);
+		}
+	}
+
+	@Override
+	public Customer deleteCustomerDetails(Integer custId) throws CustomerException {
+		
+		Optional<Customer> opt = customerRepository.findById(custId);
+		if (opt.isEmpty()) {
+			throw new CustomerException("Not found");
+		}
+		else {
+			Customer cust = opt.get();
+			customerRepository.delete(cust);
+			return cust;
+		}
+	}
+
 
 
 
