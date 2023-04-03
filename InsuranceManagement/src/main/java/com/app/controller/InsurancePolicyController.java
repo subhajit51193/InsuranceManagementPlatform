@@ -26,7 +26,7 @@ public class InsurancePolicyController {
 	private InsurancePolicyService insurancePolicyService;
 	
 	@PostMapping("/create")
-	public ResponseEntity<InsurancePolicy> createInsuranceHandler(@RequestBody InsurancePolicy insurancePolicy){
+	public ResponseEntity<InsurancePolicy> createInsuranceHandler(@RequestBody InsurancePolicy insurancePolicy) throws InsurancePolicyException{
 		InsurancePolicy ip = insurancePolicyService.createInsurance(insurancePolicy);
 		return new ResponseEntity<InsurancePolicy>(ip,HttpStatus.CREATED);
 	}

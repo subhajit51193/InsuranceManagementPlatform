@@ -7,7 +7,7 @@ import com.app.model.Customer;
 
 public interface CustomerService {
 	
-	public Customer registerCustomer(Customer customer);
+	public Customer registerCustomer(Customer customer)throws CustomerException;
 	
 	public Customer getCustomerDetailsByEmail(String email)throws CustomerException;
 	

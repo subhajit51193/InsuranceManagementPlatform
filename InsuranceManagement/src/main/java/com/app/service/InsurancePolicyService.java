@@ -7,7 +7,7 @@ import com.app.model.InsurancePolicy;
 
 public interface InsurancePolicyService {
 
-	public InsurancePolicy createInsurance(InsurancePolicy insurancePolicy);
+	public InsurancePolicy createInsurance(InsurancePolicy insurancePolicy)throws InsurancePolicyException;
 	
 	public InsurancePolicy updateInsurance(InsurancePolicy insurancePolicy,Integer policyId)throws InsurancePolicyException;
 	

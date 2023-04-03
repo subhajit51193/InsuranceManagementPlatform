@@ -22,14 +22,21 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public Customer registerCustomer(Customer customer) throws CustomerException {
 		
-		List<Authority> authorities= customer.getAuthorities();
 		
-		for(Authority authority:authorities) {
-			authority.setCustomer(customer);
-		}
-		
-		return customerRepository.save(customer);
-		
+			List<Authority> authorities= customer.getAuthorities();
+			
+			for(Authority authority:authorities) {
+				authority.setCustomer(customer);
+			}
+			
+//			return customerRepository.save(customer);
+			Customer cst = customerRepository.save(customer);
+			if (cst != null) {
+				return cst;
+			}
+			else {
+				throw new CustomerException();
+			}
 		
 	}
 
@@ -67,13 +74,27 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public Customer getCustomerbyId(Integer custId) throws CustomerException {
 		
-		Optional<Customer> opt = customerRepository.findById(custId);
-		if (opt.isEmpty()) {
+		if (custId == null) {
 			throw new CustomerException("No client found");
 		}
 		else {
-			return opt.get();
+			Optional<Customer> opt = customerRepository.findById(custId);
+			if (opt == null) {
+				throw new CustomerException("No client found");
+			}
+			else {
+				if (opt.isEmpty()) {
+					throw new CustomerException("No client found");
+				}
+				else {
+					return opt.get();
+					
+				}
+			}
+			
+
 		}
+		
 	}
 
 	@Override

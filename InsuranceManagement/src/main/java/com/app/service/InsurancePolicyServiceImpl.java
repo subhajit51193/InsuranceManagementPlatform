@@ -17,9 +17,17 @@ public class InsurancePolicyServiceImpl implements InsurancePolicyService{
 	private InsurancePolicyRepository insurancePolicyRepository;
 	
 	@Override
-	public InsurancePolicy createInsurance(InsurancePolicy insurancePolicy) {
+	public InsurancePolicy createInsurance(InsurancePolicy insurancePolicy) throws InsurancePolicyException {
 		
-		return insurancePolicyRepository.save(insurancePolicy);
+//		return insurancePolicyRepository.save(insurancePolicy);
+		InsurancePolicy ip = insurancePolicyRepository.save(insurancePolicy);
+		if (ip != null) {
+			return ip;
+		}
+		else {
+			throw new InsurancePolicyException();
+		}
+		
 	}
 
 	@Override
