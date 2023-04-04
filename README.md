@@ -55,14 +55,11 @@ In progress..
 
 As of now it is not deployed 
 
-```bash
-  npm run deploy
-```
 
 
 ## Demo
 
-Working on it...
+NA
 
 
 ## Tech Stack
