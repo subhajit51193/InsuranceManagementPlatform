@@ -46,6 +46,20 @@ Download all files and it is ready to run locally
 After installation run following link to get all API references
 
 http://localhost:8080/swagger-ui/index.html
+## Optimizations
+
+In progress..
+
+
+## Deployment
+
+As of now it is not deployed 
+
+```bash
+  npm run deploy
+```
+
+
 ## Demo
 
 Working on it...
@@ -53,7 +67,7 @@ Working on it...
 
 ## Tech Stack
 
-**Client:** Java, SpringBoot, H2 database, Swagger
+**Client:** Java, SpringBoot, H2 database
 
 **Server:** Tomcat
 
