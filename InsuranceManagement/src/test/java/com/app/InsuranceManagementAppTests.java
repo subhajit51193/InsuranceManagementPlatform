@@ -193,8 +193,65 @@ class InsuranceManagementAppTests {
 		assertEquals(ip, insurancePolicyService.createInsurance(ip));
 	}
 	
+	@Test
+	public void getAllInsuranceWithException() {
+		
+		when(insurancePolicyRepository.findAll()).thenReturn(Collections.emptyList());
+		assertThrows(InsurancePolicyException.class, 
+				() ->{
+					insurancePolicyService.getAllInsurances();
+				});
+	}
 	
+	public void getAllInsuranceWithoutException() throws InsurancePolicyException {
+		
+		InsurancePolicy ip1 = new InsurancePolicy();
+		ip1.setPolicyId(12);
+		ip1.setPolicyNo(123);
+		ip1.setPolicyType("Life");
+		ip1.setCoverageAmount(6000.00);
+		ip1.setPremiumAmount(600.00);
+		ip1.setStartDate(LocalDate.parse("2023-01-01"));
+		ip1.setEndDate(LocalDate.parse("2053-01-01"));
+		
+		InsurancePolicy ip2 = new InsurancePolicy();
+		ip2.setPolicyId(13);
+		ip2.setPolicyNo(124);
+		ip2.setPolicyType("Term");
+		ip2.setCoverageAmount(6000.00);
+		ip2.setPremiumAmount(600.00);
+		ip2.setStartDate(LocalDate.parse("2023-01-01"));
+		ip2.setEndDate(LocalDate.parse("2053-01-01"));
+		
+		when(insurancePolicyRepository.findAll()).thenReturn(Stream
+				.of(ip1,ip2).collect(Collectors.toList()));
+		assertEquals(2, insurancePolicyService.getAllInsurances().size());
+	}
 	
+	@Test
+	public void getInsuranceByIdWithException() {
+		
+		when(insurancePolicyRepository.findById(anyInt())).thenReturn(null);
+		assertThrows(InsurancePolicyException.class, 
+				() ->{
+					insurancePolicyService.getInsuranceById((int)3);
+				});
+	}
+	
+	public void getInsuranceByIdWithoutException() throws InsurancePolicyException {
+		
+		InsurancePolicy ip = new InsurancePolicy();
+		ip.setPolicyId(12);
+		ip.setPolicyNo(123);
+		ip.setPolicyType("Life");
+		ip.setCoverageAmount(6000.00);
+		ip.setPremiumAmount(600.00);
+		ip.setStartDate(LocalDate.parse("2023-01-01"));
+		ip.setEndDate(LocalDate.parse("2053-01-01"));
+		
+		when(insurancePolicyRepository.findById(anyInt())).thenReturn(Optional.of(ip));
+		assertEquals(Optional.of(ip).get(), insurancePolicyService.getInsuranceById(anyInt()));
+	}
 	
 
 }

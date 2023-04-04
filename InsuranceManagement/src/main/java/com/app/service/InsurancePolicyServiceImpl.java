@@ -79,13 +79,25 @@ public class InsurancePolicyServiceImpl implements InsurancePolicyService{
 	@Override
 	public InsurancePolicy getInsuranceById(Integer policyId) throws InsurancePolicyException {
 		
-		Optional<InsurancePolicy> opt = insurancePolicyRepository.findById(policyId);
-		if (opt.isEmpty()) {
+		if (policyId ==  null) {
 			throw new InsurancePolicyException("Not found");
 		}
 		else {
-			return opt.get();
+			Optional<InsurancePolicy> opt = insurancePolicyRepository.findById(policyId);
+			if (opt == null) {
+				throw new InsurancePolicyException("Not found");
+			}
+			else {
+				if (opt.isEmpty()) {
+					throw new InsurancePolicyException("Not found");
+				}
+				else {
+					return opt.get();
+				}
+			}
+			
 		}
+		
 	}
 
 }
